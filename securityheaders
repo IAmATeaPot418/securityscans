@@ -1,0 +1,37 @@
+#work in progress
+
+import requests
+import sys
+
+url = input("Please enter the URL you would like to scan in https://example.com format: ")
+req = requests.get(url)
+
+if req.headers.get('Content-Security-Policy') == None:
+    print('Failure: Missing Content Security Policy')
+else:
+    csp = req.headers.get('Content-Security-Policy')
+
+if req.headers.get('Strict-Transport-Security') == None:
+    print('Failure: Strict Transport Security missing')
+else:
+    hsts = req.headers.get('Strict-Transport-Security')
+
+if  req.headers.get('X-XSS-Protection') == None:
+    print('Failure: Content Security Policy missing')
+else:
+    xss = req.headers.get('X-XSS-Protection')
+
+if req.headers.get('X-Frame-Options') == None:
+    print('Failure: X-Frame-Options header missing')
+else:
+    xframeoptions = req.headers.get('X-Frame-Options')
+
+if req.headers.get('X-Content-Type-Options') == None:
+    print('Failure: X-Content-Type-Options header missing')
+else:
+    contenttype = req.headers.get('X-Content-Type-Options')
+
+if req.headers.get('Feature-Policy') == None:
+    print('Failure: Feature-Policy header missing')
+else:
+    featurepolicy = req.headers.get('Feature-Policy')
